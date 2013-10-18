@@ -4,11 +4,11 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	<servlet>
-		<servlet-name>gaeproxy</servlet-name>
-		<servlet-class>gaeproxy.GAEProxy</servlet-class>
+		<servlet-name>gaeproxyapps</servlet-name>
+		<servlet-class>gaeproxy.GAEProxyAPPs</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>gaeproxy</servlet-name>
+		<servlet-name>gaeproxyapps</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 </web-app>

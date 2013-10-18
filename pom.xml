@@ -5,8 +5,8 @@
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 
-	<groupId>gaeproxy</groupId>
-	<artifactId>gaeproxy</artifactId>
+	<groupId>gaeproxyapps</groupId>
+	<artifactId>gaeproxyapps</artifactId>
 
 	<properties>
 		<appengine.app.version>1</appengine.app.version>
