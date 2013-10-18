@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 
-public class GAEProxyAPPs extends HttpServlet {
+public class ProxyServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -4685945835054414900L;
 
@@ -30,23 +30,21 @@ public class GAEProxyAPPs extends HttpServlet {
 
 		HttpURLConnection connection = openConnection(requestURI);
 
-		copyHeaders(resp, connection);
+		copyHeaders(connection, resp);
 
-		copyBody(resp, connection);
+		copyBody(connection, resp);
 
-		ignoreGoogleAppsWarning(resp, connection);
+		hideGoogleWarning(connection, resp);
 	}
 
-	private void ignoreGoogleAppsWarning(HttpServletResponse resp, HttpURLConnection connection) {
+	private void hideGoogleWarning(HttpURLConnection connection, HttpServletResponse resp) {
 		if (!isHtmlContent(connection)) {
 			return;
 		}
 
 		try {
-			PrintWriter pw = new PrintWriter(resp.getOutputStream());
-			pw.print("<style type=\"text/css\"> .warning-panel {display: none;} </style>");
+			IOUtils.write("<style type=\"text/css\"> .warning-bar { display: none; } </style>", resp.getOutputStream());
 		} catch (IOException e) {
-			
 			throw new RuntimeException(e);
 		}
 	}
@@ -67,7 +65,7 @@ public class GAEProxyAPPs extends HttpServlet {
 		return false;
 	}
 
-	private void copyBody(HttpServletResponse resp, HttpURLConnection connection) throws IOException {
+	private void copyBody(HttpURLConnection connection, HttpServletResponse resp) throws IOException {
 		IOUtils.copy(connection.getInputStream(), resp.getOutputStream());
 	}
 
@@ -79,7 +77,7 @@ public class GAEProxyAPPs extends HttpServlet {
 		return connection;
 	}
 
-	private void copyHeaders(HttpServletResponse resp, HttpURLConnection connection) {
+	private void copyHeaders(HttpURLConnection connection, HttpServletResponse resp) {
 		for (Map.Entry<String, List<String>> entry : connection.getHeaderFields().entrySet()) {
 
 			if (entry.getKey().equalsIgnoreCase(("x-frame-options"))) {

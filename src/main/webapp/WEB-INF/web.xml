@@ -5,7 +5,7 @@
 
 	<servlet>
 		<servlet-name>gaeproxyapps</servlet-name>
-		<servlet-class>gaeproxy.GAEProxyAPPs</servlet-class>
+		<servlet-class>gaeproxyapps.ProxyServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>gaeproxyapps</servlet-name>
